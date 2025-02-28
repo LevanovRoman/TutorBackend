@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest  # Используем официальный образ PostgreSQL
+    container_name: auth_container  # Имя контейнера
+    environment:
+      POSTGRES_USER: user  # Имя пользователя PostgreSQL
+      POSTGRES_PASSWORD: password  # Пароль пользователя PostgreSQL
+      POSTGRES_DB: auth_db  # Имя базы данных
+    ports:
+      - "5444:5432"  # Проброс порта 5432 на хост
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Том для хранения данных
+    restart: always  # Автоматический перезапуск контейнера при сбоях
+
+volumes:
+  postgres_data:  # Определяем том для хранения данных PostgreSQL
