@@ -1,0 +1,19 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+GET http://localhost:8080/api/student/get-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQG1haWwuY29tIiwiaWF0IjoxNzQwNzU4NTI1LCJleHAiOjE3NDEzNjMzMjV9.V03wPqLohSL8g7mvtcAQteQnkrB90u-girXk5mBZ7Zw
+###
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "user",
+  "lastName": "user",
+  "email": "user@mail.com",
+  "city": "user",
+  "password": "user",
+  "role": "user"
+}

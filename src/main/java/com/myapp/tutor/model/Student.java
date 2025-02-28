@@ -38,7 +38,7 @@ public class Student implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "student")
     private RefreshToken refreshToken;
 
     @JsonIgnore

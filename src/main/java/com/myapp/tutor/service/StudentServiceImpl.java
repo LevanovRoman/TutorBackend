@@ -4,6 +4,7 @@ import com.myapp.tutor.dto.request.StudentRequestDto;
 import com.myapp.tutor.dto.response.StudentResponseDto;
 import com.myapp.tutor.exception.StudentAlreadyExistsException;
 import com.myapp.tutor.exception.StudentNotFoundException;
+import com.myapp.tutor.model.Role;
 import com.myapp.tutor.model.Student;
 import com.myapp.tutor.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -66,7 +67,7 @@ public class StudentServiceImpl implements StudentService {
         student.setEmail(studentRequestDto.email());
         student.setCity(studentRequestDto.city());
         student.setPassword(bCryptPasswordEncoder.encode(studentRequestDto.password()));
-        student.setRole(studentRequestDto.role());
+        student.setRole(Role.valueOf(studentRequestDto.role()));
         studentRepository.save(student);
     }
 

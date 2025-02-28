@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest  # Используем официальный образ PostgreSQL
-    container_name: auth_container  # Имя контейнера
+    container_name: tutor_resume  # Имя контейнера
     environment:
       POSTGRES_USER: user  # Имя пользователя PostgreSQL
       POSTGRES_PASSWORD: password  # Пароль пользователя PostgreSQL
