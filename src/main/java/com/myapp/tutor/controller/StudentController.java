@@ -18,31 +18,20 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @GetMapping("/get-all")
-    public ResponseEntity<List<StudentResponseDto>> getStudents(){
-        return ResponseEntity.ok(studentService.getAllStudents());
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id){
-        return ResponseEntity.ok(studentService.getStudentById(id));
-    }
 
-    @PostMapping("/create")
-    public ResponseEntity<MessageDto> addStudent(@RequestBody StudentRequestDto student){
-        studentService.createStudent(student);
-        return ResponseEntity.ok(new MessageDto("Student created successfully"));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id){
+//        return ResponseEntity.ok(studentService.getStudentById(id));
+//    }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<MessageDto> updateStudent(@RequestBody StudentRequestDto student, @PathVariable Long id){
-        studentService.updateStudent(student, id);
-        return ResponseEntity.ok(new MessageDto("Student updated successfully"));
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<MessageDto> addStudent(@RequestBody StudentRequestDto student){
+//        studentService.createStudent(student);
+//        return ResponseEntity.ok(new MessageDto("Student created successfully"));
+//    }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<MessageDto> deleteStudent(@PathVariable Long id){
-        studentService.deleteStudent(id);
-        return ResponseEntity.ok(new MessageDto("Student deleted successfully"));
-    }
+
+
+
 }

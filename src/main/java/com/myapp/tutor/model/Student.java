@@ -38,7 +38,7 @@ public class Student implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "student")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "student")
     private RefreshToken refreshToken;
 
     @JsonIgnore
@@ -47,7 +47,7 @@ public class Student implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

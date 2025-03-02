@@ -45,17 +45,18 @@ public class AuthController {
 
         String accessToken = jwtService.generateToken(student);
 
-        return ResponseEntity.ok( new AuthResponseDto(accessToken, refreshToken.getRefreshToken()));
+        return ResponseEntity.ok( new AuthResponseDto(accessToken, refreshToken.getRefreshToken(),
+                student.getRole().toString(), "refresh token"));
     }
 
-    @GetMapping("/student-info")
-    public ResponseEntity<StudentResponseDto> getUserInfo(@AuthenticationPrincipal Student student) {
-        if (student != null){
-            return ResponseEntity.ok(new StudentResponseDto(student.getId(), student.getFirstName(),
-                    student.getLastName(), student.getEmail(), student.getCity()));
-        } else {
-            return ResponseEntity.ok(new StudentResponseDto(999, "", "", "", ""));
-        }
-    }
+//    @GetMapping("/student-info")
+//    public ResponseEntity<StudentResponseDto> getUserInfo(@AuthenticationPrincipal Student student) {
+//        if (student != null){
+//            return ResponseEntity.ok(new StudentResponseDto(student.getId(), student.getFirstName(),
+//                    student.getLastName(), student.getEmail(), student.getCity()), student.getRole().name());
+//        } else {
+//            return ResponseEntity.ok(new StudentResponseDto(999, "", "", "", "", ""));
+//        }
+//    }
 
 }

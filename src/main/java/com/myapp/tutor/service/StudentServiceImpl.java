@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,19 +33,37 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void createStudent(StudentRequestDto studentRequestDto) {
-        if (studentAlreadyExists(studentRequestDto.email())){
-            throw  new StudentAlreadyExistsException(studentRequestDto.email() + " already exists!");
+    public StudentResponseDto getMyInfo(String email) {
+        try{
+            Optional<Student> studentOptional = studentRepository.findByEmail(email);
+            if (studentOptional.isPresent()) {
+                return convertStudentToStudentResponseDto(studentOptional.get());
+            } else throw new StudentNotFoundException("Student not found");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        Student studentCreated = new Student();
-        saveStudent(studentRequestDto, studentCreated);
     }
+
+//    @Override
+//    public void createStudent(StudentRequestDto studentRequestDto) {
+//        if (studentAlreadyExists(studentRequestDto.email())){
+//            throw  new StudentAlreadyExistsException(studentRequestDto.email() + " already exists!");
+//        }
+//        Student studentCreated = new Student();
+//        saveStudent(studentRequestDto, studentCreated);
+//    }
 
     @Override
     public void updateStudent(StudentRequestDto studentRequestDto, Long studentId) {
         Student studentUpdated = findStudentById(studentId);
-        saveStudent(studentRequestDto, studentUpdated);
+        studentUpdated.setFirstName(studentRequestDto.firstName());
+        studentUpdated.setLastName(studentRequestDto.lastName());
+        studentUpdated.setEmail(studentRequestDto.email());
+        studentUpdated.setCity(studentRequestDto.city());
+        studentUpdated.setRole(Role.valueOf(studentRequestDto.role()));
+        studentRepository.save(studentUpdated);
     }
+    //TODO смена пароля
 
     @Override
     public void deleteStudent(Long id) {
@@ -53,7 +72,7 @@ public class StudentServiceImpl implements StudentService {
 
     private StudentResponseDto convertStudentToStudentResponseDto(Student student) {
         return new StudentResponseDto(student.getId(), student.getFirstName(), student.getLastName(),
-                student.getEmail(), student.getCity());
+                student.getEmail(), student.getCity(), student.getRole().name());
     }
 
     private Student findStudentById(Long id) {
@@ -61,15 +80,15 @@ public class StudentServiceImpl implements StudentService {
                 .orElseThrow(() -> new StudentNotFoundException("Sorry, no student found with the Id :" + id));
     }
 
-    private void saveStudent(StudentRequestDto studentRequestDto, Student student) {
-        student.setFirstName(studentRequestDto.firstName());
-        student.setLastName(studentRequestDto.lastName());
-        student.setEmail(studentRequestDto.email());
-        student.setCity(studentRequestDto.city());
-        student.setPassword(bCryptPasswordEncoder.encode(studentRequestDto.password()));
-        student.setRole(Role.valueOf(studentRequestDto.role()));
-        studentRepository.save(student);
-    }
+//    private void saveStudent(StudentRequestDto studentRequestDto, Student student) {
+//        student.setFirstName(studentRequestDto.firstName());
+//        student.setLastName(studentRequestDto.lastName());
+//        student.setEmail(studentRequestDto.email());
+//        student.setCity(studentRequestDto.city());
+//        student.setPassword(bCryptPasswordEncoder.encode(studentRequestDto.password()));
+//        student.setRole(Role.valueOf(studentRequestDto.role()));
+//        studentRepository.save(student);
+//    }
 
     private boolean studentAlreadyExists(String email) {
         return studentRepository.findByEmail(email).isPresent();

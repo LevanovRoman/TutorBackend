@@ -5,7 +5,7 @@ public record StudentRequestDto(
         String lastName,
         String email,
         String city,
-        String password,
+//        String password,
         String role
 ) {
 }

@@ -35,29 +35,36 @@ public class AuthService {
                 .email(registerRequest.email())
                 .city(registerRequest.city())
                 .password(passwordEncoder.encode(registerRequest.password()))
-                .role(Role.USER)
+                .role(Role.valueOf(registerRequest.role()))
                 .build();
 
         Student savedStudent = studentRepository.save(student);
         var accessToken = jwtService.generateToken(savedStudent);
         var refreshToken = refreshTokenService.createRefreshToken(savedStudent.getEmail());
 
-        return  new AuthResponseDto(accessToken, refreshToken.getRefreshToken());
+        return  new AuthResponseDto(accessToken, refreshToken.getRefreshToken(),
+                savedStudent.getRole().toString(),"Student Registered Successfully" );
     }
 
     public AuthResponseDto login(LoginRequestDto loginRequest) {
 
-        var user = studentRepository.findByEmail(loginRequest.email())
-                .orElseThrow(() -> new ObjectNotFoundCustomException("User not found!"));
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.email(),
-                        loginRequest.password()
-                )
-        );
-        var accessToken = jwtService.generateToken(user);
-        var refreshToken = refreshTokenService.createRefreshToken(loginRequest.email());
+        try{
+            var student = studentRepository.findByEmail(loginRequest.email())
+                    .orElseThrow(() -> new ObjectNotFoundCustomException("User not found!"));
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.email(),
+                            loginRequest.password()
+                    )
+            );
+            var accessToken = jwtService.generateToken(student);
+            var refreshToken = refreshTokenService.createRefreshToken(loginRequest.email());
 
-        return new AuthResponseDto(accessToken, refreshToken.getRefreshToken());
+            return new AuthResponseDto(accessToken, refreshToken.getRefreshToken(),
+                    student.getRole().toString(), "Successfully Logged In");
+        } catch (Exception e) {
+            return new AuthResponseDto(null, null, null, "Неверный логин или пароль");
+        }
+
     }
 }

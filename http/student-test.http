@@ -8,16 +8,17 @@ GET http://localhost:8080/api/student/get-all
 Authorization: Basic user:user
 ###
 ###
-POST http://localhost:8080/api/student/create
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQG1haWwuY29tIiwiaWF0IjoxNzQwNzU4NTI1LCJleHAiOjE3NDEzNjMzMjV9.V03wPqLohSL8g7mvtcAQteQnkrB90u-girXk5mBZ7Zw
 
 {
-  "firstName": "user",
-  "lastName": "user",
-  "email": "user@mail.com",
-  "city": "user",
-  "password": "user",
-  "role": "USER"
+  "firstName": "admin",
+  "lastName": "admin",
+  "email": "admin@mail.com",
+  "city": "admin",
+  "password": "admin",
+  "role": "ADMIN"
 }
 ###
 DELETE http://localhost:8080/api/student/delete/1

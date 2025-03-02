@@ -13,7 +13,9 @@ public interface StudentService {
 
     StudentResponseDto getStudentById(Long studentId);
 
-    void createStudent(StudentRequestDto studentRequestDto);
+    StudentResponseDto getMyInfo(String email);
+
+//    void createStudent(StudentRequestDto studentRequestDto);
 
     void updateStudent(StudentRequestDto studentRequestDto, Long studentId);
 

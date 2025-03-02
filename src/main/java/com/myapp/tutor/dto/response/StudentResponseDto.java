@@ -7,7 +7,10 @@ public record StudentResponseDto(
         String firstName,
         String lastName,
         String email,
-        String city
+        String city,
+        String role
+//        int status,
+//        String message
 //        List<TaskResponseDto> taskList
 ) {
 }
