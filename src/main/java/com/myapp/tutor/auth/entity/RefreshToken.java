@@ -1,8 +1,7 @@
 package com.myapp.tutor.auth.entity;
 
-import com.myapp.tutor.model.Student;
+import com.myapp.tutor.entity.Student;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

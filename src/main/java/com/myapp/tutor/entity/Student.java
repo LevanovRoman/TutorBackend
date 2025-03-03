@@ -1,6 +1,7 @@
-package com.myapp.tutor.model;
+package com.myapp.tutor.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.myapp.tutor.TodoApp.entity.Task;
 import com.myapp.tutor.auth.entity.RefreshToken;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,11 @@ public class Student implements UserDetails {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<Task> taskList = new ArrayList<>();
+
+    public String addTaskToList(Task task){
+        taskList.add(task);
+        return "Task added successfully";
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

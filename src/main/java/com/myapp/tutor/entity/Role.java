@@ -1,4 +1,4 @@
-package com.myapp.tutor.model;
+package com.myapp.tutor.entity;
 
 public enum Role {
     USER,

@@ -1,6 +1,5 @@
 package com.myapp.tutor.auth.service;
 
-import com.myapp.tutor.model.Student;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

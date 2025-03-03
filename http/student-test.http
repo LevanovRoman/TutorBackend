@@ -1,11 +1,15 @@
 ###
-#> {%
-#client.global.set("id2", "1");
-#%}
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@mail.com",
+  "password": "admin"
+}
 
 ### GET request to example server
-GET http://localhost:8080/api/student/get-all
-Authorization: Basic user:user
+GET http://localhost:8080/api/admin/get-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQG1haWwuY29tIiwiaWF0IjoxNzQwNzU4NTI1LCJleHAiOjE3NDEzNjMzMjV9.V03wPqLohSL8g7mvtcAQteQnkrB90u-girXk5mBZ7Zw
 ###
 ###
 POST http://localhost:8080/api/auth/register
@@ -21,17 +25,29 @@ Content-Type: application/json
   "role": "ADMIN"
 }
 ###
-DELETE http://localhost:8080/api/student/delete/1
-###
-GET http://localhost:8080/api/student/2
-###
-PUT http://localhost:8080/api/student/update/3
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "firstName": "{{$random.alphabetic(6)}}",
-  "lastName": "{{$random.alphabetic(8)}}",
-  "email": "{{$random.email}}",
-  "city": "{{$random.alphabetic(12)}}"
+  "firstName": "user2",
+  "lastName": "user2",
+  "email": "user2@mail.com",
+  "city": "user2",
+  "password": "user2",
+  "role": "USER"
 }
+
+###
+POST http://localhost:8080/api/admin-user/task/add-task/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTc0MDk5MDIzNCwiZXhwIjoxNzQxNTk1MDM0fQ.zf_vbFIzt-n_gGiYzNusQZJLgrllW5EFc3BG6-6SRng
+
+{
+  "title": "Second task"
+}
+
+###
+GET http://localhost:8080/api/admin-user/task/task-list/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTc0MDk5MDIzNCwiZXhwIjoxNzQxNTk1MDM0fQ.zf_vbFIzt-n_gGiYzNusQZJLgrllW5EFc3BG6-6SRng
+
 ###

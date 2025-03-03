@@ -8,13 +8,11 @@ import com.myapp.tutor.auth.entity.RefreshToken;
 import com.myapp.tutor.auth.service.AuthService;
 import com.myapp.tutor.auth.service.JwtService;
 import com.myapp.tutor.auth.service.RefreshTokenService;
-import com.myapp.tutor.dto.response.StudentResponseDto;
-import com.myapp.tutor.model.Student;
+import com.myapp.tutor.entity.Student;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

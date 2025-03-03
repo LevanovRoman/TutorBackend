@@ -2,10 +2,9 @@ package com.myapp.tutor.service;
 
 import com.myapp.tutor.dto.request.StudentRequestDto;
 import com.myapp.tutor.dto.response.StudentResponseDto;
-import com.myapp.tutor.exception.StudentAlreadyExistsException;
 import com.myapp.tutor.exception.StudentNotFoundException;
-import com.myapp.tutor.model.Role;
-import com.myapp.tutor.model.Student;
+import com.myapp.tutor.entity.Role;
+import com.myapp.tutor.entity.Student;
 import com.myapp.tutor.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -75,9 +74,9 @@ public class StudentServiceImpl implements StudentService {
                 student.getEmail(), student.getCity(), student.getRole().name());
     }
 
-    private Student findStudentById(Long id) {
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException("Sorry, no student found with the Id :" + id));
+    public Student findStudentById(Long studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new StudentNotFoundException("Sorry, no student found with the Id :" + studentId));
     }
 
 //    private void saveStudent(StudentRequestDto studentRequestDto, Student student) {

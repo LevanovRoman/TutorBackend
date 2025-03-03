@@ -1,6 +1,7 @@
-package com.myapp.tutor.model;
+package com.myapp.tutor.TodoApp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.myapp.tutor.entity.Student;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

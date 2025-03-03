@@ -1,4 +1,4 @@
-package com.myapp.tutor.dto.response;
+package com.myapp.tutor.TodoApp.dto.response;
 
 public record TaskResponseDto(
         Long id,

@@ -4,7 +4,7 @@ import com.myapp.tutor.auth.entity.RefreshToken;
 import com.myapp.tutor.auth.repository.RefreshTokenRepository;
 import com.myapp.tutor.exception.ObjectNotFoundCustomException;
 import com.myapp.tutor.exception.RefreshTokenExpiredException;
-import com.myapp.tutor.model.Student;
+import com.myapp.tutor.entity.Student;
 import com.myapp.tutor.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
