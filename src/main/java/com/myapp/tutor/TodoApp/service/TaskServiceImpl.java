@@ -5,8 +5,8 @@ import com.myapp.tutor.TodoApp.dto.response.TaskResponseDto;
 import com.myapp.tutor.TodoApp.entity.Task;
 import com.myapp.tutor.TodoApp.repository.TaskRepository;
 import com.myapp.tutor.dto.MessageDto;
-import com.myapp.tutor.dto.response.StudentResponseDto;
 import com.myapp.tutor.entity.Student;
+import com.myapp.tutor.exception.ObjectNotFoundCustomException;
 import com.myapp.tutor.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,21 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(Long id) {
+    public MessageDto deleteTask(Long id) {
+        taskRepository.delete(findTaskById(id));
+        return new MessageDto("Task deleted successfully");
+    }
 
+    @Override
+    public MessageDto changeStatusTask(long taskId) {
+        Task task = findTaskById(taskId);
+        task.setCompleted(! task.isCompleted());
+        taskRepository.save(task);
+        return new MessageDto("successfully change");
+    }
+
+    private Task findTaskById(long taskId){
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new ObjectNotFoundCustomException("Task not found"));
     }
 }

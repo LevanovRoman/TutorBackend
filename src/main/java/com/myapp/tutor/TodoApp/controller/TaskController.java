@@ -18,16 +18,26 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @GetMapping("/task-list/{studentId}")
+    @GetMapping("/list/{studentId}")
     public ResponseEntity<List<TaskResponseDto>> getTaskList(@PathVariable("studentId") long studentId){
         return ResponseEntity.ok(taskService.getTaskList(studentId));
     }
 
-    @PostMapping("/add-task/{studentId}")
+    @PostMapping("/add/{studentId}")
     public ResponseEntity<MessageDto> addTaskToStudent(@RequestBody TaskRequestDto taskRequestDto,
                                                        @PathVariable("studentId") long studentId) {
         System.out.println(taskRequestDto.title());
         System.out.println(studentId);
         return ResponseEntity.ok(taskService.addTask(taskRequestDto, studentId));
+    }
+
+    @DeleteMapping("/delete/{studentId}")
+    public ResponseEntity<MessageDto> deleteTask(@PathVariable("studentId") long studentId) {
+        return ResponseEntity.ok(taskService.deleteTask(studentId));
+    }
+
+    @GetMapping("/change-status/{taskId}")
+    public ResponseEntity<MessageDto> changeStatusTask(@PathVariable("taskId") long taskId){
+        return ResponseEntity.ok(taskService.changeStatusTask(taskId));
     }
 }

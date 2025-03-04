@@ -46,10 +46,10 @@ public class Student implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<Task> taskList = new ArrayList<>();
 
-    public String addTaskToList(Task task){
-        taskList.add(task);
-        return "Task added successfully";
-    }
+//    public String addTaskToList(Task task){
+//        taskList.add(task);
+//        return "Task added successfully";
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
